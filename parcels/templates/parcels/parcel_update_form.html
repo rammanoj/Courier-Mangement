@@ -1,0 +1,45 @@
+{% include 'Base/base.html' %}
+<h2>Add Courier:</h2>
+<br>
+{% block content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}<body style="background-color: #dcdbdd">
+	<br>
+	<div class="container">
+		<form method="post">
+            {% csrf_token %}
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput1">Courier Service</label>
+			<input type="textarea" class="form-control" name="delivery_service" value="{{ form.delivery_service.value|default_if_none:"" }}"
+                   id="exampleFormControlInput1" placeholder="123456789">
+		  </div>
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput2">Parcel ID</label>
+			<input type="textarea" class="form-control" name="parcel_id" value="{{ form.parcel_id.value|default_if_none:"" }}"
+                   id="exampleFormControlInput2" placeholder="example: Amazon, Flipkart etc.">
+		  </div>
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput3">Student ID</label>
+			<input type="textarea" class="form-control" name="student" value="{{ form.student.value|default_if_none:"" }}"
+                   id="exampleFormControlInput3" placeholder="Student ID">
+		  </div>
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary">Submit</button>
+		  </div>
+		</form>
+	</div>
+</body>
+
+{% endblock %}

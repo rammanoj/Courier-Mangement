@@ -1,0 +1,39 @@
+{% include 'Base/base.html' %}
+<h2>Add Courier:</h2>
+<br>
+{% block content %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <h4><div style="color: #75998a">{{ message }}</div></h4>
+        {% endfor %}
+    </ul>
+    {% endif %}
+<body style="background-color: #dcdbdd">
+	<br>
+	<div class="container">
+		<form method="post">
+            {% csrf_token %}
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput1">Courier Service</label>
+			<input type="textarea" class="form-control" name="delivery_service" value="{{ form.delivery_service.value|default_if_none:"" }}"
+                   id="exampleFormControlInput1" placeholder="123456789">
+		  </div>
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput2">Parcel ID</label>
+			<input type="textarea" class="form-control" name="parcel_id" value="{{ form.parcel_id.value|default_if_none:"" }}"
+                   id="exampleFormControlInput2" placeholder="example: Amazon, Flipkart etc.">
+		  </div>
+		  <div class="form-group col-4">
+			<label for="exampleFormControlInput3">Student ID</label>
+			<input type="textarea" class="form-control" name="student" value="{{ form.student.value|default_if_none:"" }}"
+                   id="exampleFormControlInput3" placeholder="Student ID">
+		  </div>
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary">Submit</button>
+		  </div>
+		</form>
+	</div>
+</body>
+
+{% endblock %}

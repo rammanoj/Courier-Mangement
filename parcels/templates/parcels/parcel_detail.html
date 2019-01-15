@@ -1,0 +1,50 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block content %}
+<body background="{% static 'accounts/images/back.jpg' %}">
+
+
+</body>
+    <h1>Parcel Details:</h1>
+    <div class="container">
+        <p><b>Parcelid:</b> {{ object.parcel_id }}</p>
+        <p><b>Service:</b> {{ object.delivery_service }}</p>
+        <p><b>Date arrived:</b> {{ object.date_taken }}</p>
+        <p><b>Clerk:</b> {{ object.added_by }}</p>
+        <p><b>Delivery status:</b> {{ object.status }}</p>
+    <div style="color:red;">
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <h4><div style="color: #75998a">{{ message }}</div></h4>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+    {% if user.groups.all.0.name != 'Student' %}
+    {% if object.status != True %}
+        <form action="{% url 'student-confirm' %}" method="post">
+        {% csrf_token %}
+        <label>PIN:</label>
+        <input type="password" name="pin">
+        <input type="hidden" name="student" value="{{ object.student }}">
+        <input type="hidden" name="parcel" value="{{ object.parcel_id }}">
+        <button class="btn btn-primary" type="submit">Deliver</button>
+        </form>
+    {% else %}
+        <h3 style="color: #75998a">Parcel already taken</h3>
+    {% endif %}
+    {% endif %}
+
+    {% if user.groups.all.0.name != 'Student' %}
+        <a href="{% url 'parcel-update' object.pk %}"><button class="btn btn-warning">Update</button></a>
+    {% endif %}
+
+    {% if user.groups.all.0.name == 'Admin' %}
+        <a href="{% url 'parcel-delete' object.pk %}"><button class="btn btn-danger">Delete</button></a>
+    {% endif %}
+
+    </div>
+
+{% endblock %}
