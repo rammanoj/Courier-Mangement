@@ -12,6 +12,11 @@ class ParcelForm(forms.ModelForm):
             raise forms.ValidationError('Enter the valid StudentId')
         return self.cleaned_data['student']
 
+    def clean_parcel_id(self):
+        if models.Parcel.objects.filter(parcel_id=self.cleaned_data.get('parcel_id', None)).exists():
+            raise forms.ValidationError('Parcelid has to be unique!!')
+        return self.cleaned_data['student']
+
     def save(self, commit=True):
         parcel = super(ParcelForm, self).save()
 
