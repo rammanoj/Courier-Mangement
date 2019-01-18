@@ -1,6 +1,6 @@
 
 
-**Amrita courier management system** :
+##Amrita courier management system:
 
 A web application to efficiently manage the courier operations in the campus.
 
@@ -35,6 +35,7 @@ Once a delivery entered into the database by the courier operator the student is
 
 **Installation:**
 
+The **requirements.txt** file is in the **parcels** directory.
 The website is easy to install, follow these instructions to complete the installation:
 
 1. Clone the code with the command
